@@ -80,14 +80,14 @@ public class UserServiceImpl implements UserService {
 		SampleUser user = null;
 		
 		for(int i=0; i < userCount-startUserId + 1; i++) {
-			user = new SampleUser();
-			
-			user.setUserId("user"+String.format("%02d", startUserId+i));
-			user.setUserNm("유저"+String.format("%02d", startUserId+i));
-			user.setAddr("");
-			user.setCellPhone(String.format("%02d", startUserId+i));
-			user.setAgreeInform("Yes");
-			user.setBirthDt(String.format("%02d", startUserId+i));
+			user = new SampleUser(
+					"user"+String.format("%02d", startUserId+i),
+					"유저"+String.format("%02d", startUserId+i),
+					"",
+					String.format("%02d", startUserId+i),
+					"Yes",
+					String.format("%02d", startUserId+i)
+					);
 			
 			list.add(user);
 		}
