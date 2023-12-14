@@ -1,5 +1,5 @@
 
-def label = "mybatis-sample-u00-${env.BUILD_NUMBER}"
+def label = "springboot-gradle-u00-${env.BUILD_NUMBER}"
 
 /* -------- functions ---------- */
 def notifySlack(STATUS, COLOR) {
@@ -13,19 +13,19 @@ podTemplate(
 	containers: [
 		containerTemplate(name: "trivy", image: "aquasec/trivy", ttyEnabled: true, command: "cat"),
 		containerTemplate(name: "kubectl", image: "lachlanevenson/k8s-kubectl", command: "cat", ttyEnabled: true),
-		containerTemplate(name: "maven", image: "maven:3.8.5-openjdk-17", ttyEnabled: true, command: "cat"),
+		containerTemplate(name: "gradle", image: "gradle:jdk17", ttyEnabled: true, command: "cat"),
 		containerTemplate(name: 'podman', image: 'mgoltzsche/podman', ttyEnabled: true, command: 'cat', privileged: true)
 	],
 	//volume mount
     volumes: [
-    	nfsVolume( mountPath: '/root/.m2', serverAddress: '10.193.24.247', serverPath: '/data/maven', readOnly: false ),
+    	nfsVolume( mountPath: '/root/.gradle', serverAddress: '10.193.24.247', serverPath: '/users/data/gradle', readOnly: false ),
     ]
 ) 
 
 {
 	node(label) {
 		stage("Get Source") {
-			git branch: 'main', url: 'https://github.com/happykubepia/mybatis-sample.git'
+			git branch: 'main', url: 'https://github.com/happykubepia/springboot-gradle.git'
         } 
 
 		//-- Read pipeline.properties and setting variables
@@ -43,9 +43,9 @@ podTemplate(
 
 		try {
 			stage("Build Jar") {
-				container("maven") {
-					sh 'echo "Build jar under target directory"'
-					sh "mvn clean package -DskipTests"
+				container("gradle") {
+					sh 'echo "Build jar under build/libs directory"'
+					sh "gradle build -x test"
 				}
 			}
 
