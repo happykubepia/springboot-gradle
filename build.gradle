@@ -39,3 +39,10 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar{
+    //archivesBaseName = '프로젝트이름'
+    archiveFileName = 'springboot-gradle.jar'
+    //archiveVersion = "0.0.1"
+}
+
