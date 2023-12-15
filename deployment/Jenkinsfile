@@ -1,5 +1,5 @@
 
-def label = "springboot-gradle-u00-${env.BUILD_NUMBER}"
+def label = "springboot-gradle-hiondal-${env.BUILD_NUMBER}"
 
 /* -------- functions ---------- */
 def notifySlack(STATUS, COLOR) {

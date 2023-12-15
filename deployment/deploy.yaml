@@ -45,7 +45,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: springboot-gradle
-  namespace: u00
 data:
   DB_SERVER: mysql
   DB_PORT: "3306"
@@ -57,7 +56,6 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: springboot-gradle
-  namespace: u00
 type: Opaque
 data:
   DB_USERNAME: cm9vdAo=            #echo root | base64
@@ -89,7 +87,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: springboot-gradle-u00.165.192.105.60.nip.io
+    - host: springboot-gradle-hiondal.165.192.105.60.nip.io
       http:
         paths:
           - path: /(.*)
