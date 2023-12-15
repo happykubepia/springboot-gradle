@@ -22,6 +22,12 @@ spec:
           env:
             - name: PORT
               value: "8080"
+          envFrom:
+          - configMapRef:
+              name: springboot-gradle
+          - secretRef:
+              name: springboot-gradle
+                            
           ports:
             - name: port1
               containerPort: 8081
@@ -33,6 +39,29 @@ spec:
               cpu: 500m
               memory: 1024Mi
 
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: springboot-gradle
+  namespace: u00
+data:
+  DB_SERVER: mysql
+  DB_PORT: "3306"
+  DB_NAME: "mydb"
+
+---
+
+kind: Secret
+apiVersion: v1
+metadata:
+  name: springboot-gradle
+  namespace: u00
+type: Opaque
+data:
+  DB_USERNAME: cm9vdAo=            #echo root | base64
+  DB_PASSWORD: UEBzc3cwcmQkCg==    #echo P@ssw0rd$ | base64 
 ---
 
 apiVersion: v1
