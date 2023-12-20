@@ -15,12 +15,12 @@ spec:
       labels:
         app: springboot-gradle
     spec:
+      imagePullSecrets:
+      - name: dockerhub      
       containers:
         - name: springboot-gradle
           image: docker.io/hiondal/springboot-gradle:latest
           imagePullPolicy: Always
-          imagePullSecrets:
-          - name: dockerhub
           env:
             - name: PORT
               value: "8080"
