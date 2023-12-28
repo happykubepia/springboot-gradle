@@ -8,10 +8,10 @@ ENV ARTIFACTORY_HOME ${HOME}
 
 # DON'T change USERNAME
 # Add a docker user, make work dir
-RUN adduser --disabled-password --gecos "" ${USERNAME} && \
-  echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-  mkdir -p ${ARTIFACTORY_HOME} && \
-  chown ${USERNAME}:${USERNAME} ${ARTIFACTORY_HOME}
+#RUN adduser --disabled-password --gecos "" ${USERNAME} && \
+#  echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+#  mkdir -p ${ARTIFACTORY_HOME} && \
+#  chown ${USERNAME}:${USERNAME} ${ARTIFACTORY_HOME}
 
 WORKDIR ${ARTIFACTORY_HOME}
 
