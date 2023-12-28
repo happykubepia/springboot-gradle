@@ -2,8 +2,9 @@ FROM openjdk:17-alpine
 
 ARG ARTIFACTORY_FILE
 ENV ARTIFACTORY_FILE ${ARTIFACTORY_FILE}
-ENV USERNAME docker  
-ENV ARTIFACTORY_HOME /home/${USERNAME}
+#ENV USERNAME docker  
+#ENV ARTIFACTORY_HOME /home/${USERNAME}
+ENV ARTIFACTORY_HOME ${HOME}
 
 # DON'T change USERNAME
 # Add a docker user, make work dir
@@ -19,6 +20,6 @@ COPY ./build/libs/${ARTIFACTORY_FILE} ${ARTIFACTORY_HOME}
 
 # Launch the artifactory as docker user
 ENTRYPOINT [ "sh", "-c" ]
-USER docker
+#USER docker
 #CMD [ "java --Dspring.profiles.active=${PROFILE} -jar ${ARTIFACTORY_FILE}" ]
 CMD [ "java -jar ${ARTIFACTORY_FILE}" ]
