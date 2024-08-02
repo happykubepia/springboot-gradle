@@ -25,7 +25,8 @@ podTemplate(
 {
 	node(label) {
 		stage("Get Source") {
-			git branch: 'main', url: 'https://github.com/happykubepia/springboot-gradle.git'
+			//git branch: 'main', url: 'https://github.com/happykubepia/springboot-gradle.git'
+			checkout scm
         } 
 
 		//-- Read pipeline.properties and setting variables
