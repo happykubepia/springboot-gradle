@@ -60,7 +60,7 @@ metadata:
   name: springboot-gradle
 type: Opaque
 data:
-  DB_USERNAME: cm9vdAo=            #echo root | base64
+  DB_USERNAME: YWRtaW4K            #echo root | base64
   DB_PASSWORD: UEBzc3cwcmQkCg==    #echo P@ssw0rd$ | base64 
 ---
 
