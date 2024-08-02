@@ -59,9 +59,9 @@ apiVersion: v1
 metadata:
   name: springboot-gradle
 type: Opaque
-data:
-  DB_USERNAME: cm9vdAo=            #echo root | base64
-  DB_PASSWORD: UEBzc3cwcmQkCg==    #echo P@ssw0rd$ | base64 
+stringData:
+  DB_USERNAME: root
+  DB_PASSWORD: P@ssw0rd$
 ---
 
 apiVersion: v1
