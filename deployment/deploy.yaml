@@ -89,7 +89,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: springboot-gradle-hiondal.165.192.105.60.nip.io
+    - host: gappa.springboot-gradle.43.200.12.214.nip.io
       http:
         paths:
           - path: /(.*)

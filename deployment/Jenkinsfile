@@ -1,9 +1,9 @@
 
-def label = "springboot-gradle-hiondal-${env.BUILD_NUMBER}"
+def label = "springboot-gradle-gappa-${env.BUILD_NUMBER}"
 
 /* -------- functions ---------- */
 def notifySlack(STATUS, COLOR) {
-	slackSend (channel: '#cicd', color: COLOR, message: STATUS+" : " +  "${env.JOB_NAME} [${env.BUILD_NUMBER}] (${env.BUILD_URL})")
+	//slackSend (channel: '#cicd', color: COLOR, message: STATUS+" : " +  "${env.JOB_NAME} [${env.BUILD_NUMBER}] (${env.BUILD_URL})")
 }
 
 notifySlack("STARTED", "#FFFF00")
@@ -18,7 +18,7 @@ podTemplate(
 	],
 	//volume mount
     volumes: [
-    	nfsVolume( mountPath: '/root/.gradle', serverAddress: '10.193.24.247', serverPath: '/users/data/gradle', readOnly: false ),
+    	nfsVolume( mountPath: '/root/.gradle', serverAddress: '43.200.12.214', serverPath: '/data/nfs/gradle', readOnly: false ),
     ]
 ) 
 
@@ -53,11 +53,11 @@ podTemplate(
 				container("podman") {
 					withCredentials([usernamePassword(
 						credentialsId: "${credentialRegistry}",
-						usernameVariable: 'USER',
+						usernameVariable: 'USERNAME',
 						passwordVariable: 'PASSWORD'
 						)]) {
-						    sh 'echo user "$USER" pasword "$PASSWORD"'
-						    sh "podman login ${registry} --username ${USER} --password ${PASSWORD}"
+						    sh 'echo user "$USERNAME" pasword "$PASSWORD"'
+						    sh "podman login ${registry} --username ${USERNAME} --password ${PASSWORD}"
 							sh "podman build -f ./deployment/Dockerfile -t ${registry}/${organization}/${repository}:${tag} --build-arg ARTIFACTORY_FILE=${repository}.jar ."
 							sh "sleep 2"
 							sh "podman push ${registry}/${organization}/${repository}:${tag}"

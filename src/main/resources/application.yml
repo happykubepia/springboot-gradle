@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: springboot-gradle
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql  # Table ?? SQL
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_SERVER:localhost}:${DB_PORT:3306}/${DB_NAME:mydb}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:P@ssw0rd$}
+
+server:
+  port: ${PORT:38080}
+  servlet:
+    context-path: ${SERVLET_CONTEXT_PATH:/}
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+springdoc:
+  packagesToScan: com.example.rest
+  pathsToMatch: /**
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc: DEBUG
